@@ -82,11 +82,7 @@ void pushBack(List * list, void * data) {
 
 void pushCurrent(List * list, void * data) {
     Node * newnode = createNode(data);
-    if(list->current == NULL)
-    {
-        list->head = newnode;
-        list->current =newnode;
-    }
+    if(list->current == NULL)pushFront(list,data);
     else
     {
         if(list->current->next != NULL)list->current->next->prev = newnode;
