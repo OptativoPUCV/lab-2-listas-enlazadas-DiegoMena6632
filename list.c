@@ -90,7 +90,6 @@ void pushCurrent(List * list, void * data) {
         list->current->next = newnode;
         newnode->prev = list->current;
     }
-    
 }
 
 void * popFront(List * list) {
@@ -104,7 +103,15 @@ void * popBack(List * list) {
 }
 
 void * popCurrent(List * list) {
-    return NULL;
+    if(list->current == NULL)return NULL;
+    Node * temp = list->current;
+    void * data = temp->data;
+    if(temp->prev != NULL)temp->prev->next = temp->next;
+    else list->head = temp->next;
+    if(temp->next != NULL)temp->next->prev = temp->prev;
+    else list->tail = temp->prev;
+    free(temp);
+    return data;
 }
 
 void cleanList(List * list) {
